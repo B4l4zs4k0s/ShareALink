@@ -2,23 +2,16 @@ package com.example.sharealink.app.services;
 
 import com.example.sharealink.app.models.dtos.Token;
 import com.example.sharealink.app.models.entities.User;
-import com.example.sharealink.app.repositories.UserRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 import org.apache.commons.codec.digest.DigestUtils;
-
 import java.util.Base64;
 
 
 @Service
 public class TokenService {
-    private final UserRepository userRepository;
     ObjectMapper objectMapper = new ObjectMapper();
-
-    public TokenService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     public String createToken(User user) {
         String token = objectToJson(

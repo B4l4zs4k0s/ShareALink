@@ -6,7 +6,7 @@
 </head>
 <body>
 <h2 th:text="'Welcome ' + ${username} + ' to the main page.'"></h2>
-<a href="/feed/1">See Links Ordered By Rating</a><br>
+<a href="/topPosts/1">See Links Ordered By Rating</a><br>
 <a href="/newPost" class="btn btn-primary">Submit new post</a><br>
 <table>
     <thead>
@@ -15,12 +15,14 @@
         <th>Vote up</th>
         <th>Vote down</th>
         <th>Title</th>
+        <th>URL</th>
     </tr>
     </thead>
     <tr th:each="post : ${listOfPosts}" >
         <td th:text="${post.getVotes}"></td>
         <td><a th:href="@{'/upVote/' + ${post.getId()}}" th:method="post" >+</a></td>
         <td><a th:href="@{'/downVote/' + ${post.getId()}}" th:method="post" >-</a></td>
+        <td><a  th:text="*{post.getTitle}"></a></td>
         <td><a  th:text="*{post.getUrl}"></a></td>
     </tr>
 </table>

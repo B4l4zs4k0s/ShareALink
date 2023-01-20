@@ -14,12 +14,14 @@
         <th>Vote up</th>
         <th>Vote down</th>
         <th>Title</th>
+        <th>URL</th>
     </tr>
     </thead>
     <tr th:each="post : ${listOfPosts}" >
         <td th:text="${post.getVotes}"></td>
         <td><a th:href="@{'/upVote/' + ${post.getId()}}" th:method="post" >+</a></td>
         <td><a th:href="@{'/downVote/' + ${post.getId()}}" th:method="post" >-</a></td>
+        <td><a  th:text="*{post.getUrl}"></a></td>
         <td><a  th:text="*{post.getUrl}"></a></td>
     </tr>
 </table>
