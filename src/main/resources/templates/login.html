@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+
+<body>
+<h1>Welcome to ShareALink!</h1>
+<form method="post" th:action="@{/}" th:object="${auth}">
+    <input type="text" name="username" placeholder="provide username"><br>
+    <input type="text" name="password" placeholder="provide password"><br>
+    <input type="submit" value="Login">
+</form>
+<p>If you haven't registered yet...</p>
+<a th:href="'/register'">Register Now!</a>
+</body>
+</html>

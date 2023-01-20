@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main Feed</title>
+</head>
+<body>
+<h2 th:text="'Welcome ' + ${username} + ' to the main page.'"></h2>
+<a href="/feed/1">See Links Ordered By Rating</a><br>
+<a href="/newPost" class="btn btn-primary">Submit new post</a><br>
+<table>
+    <thead>
+    <tr>
+        <th>Votes</th>
+        <th>Vote up</th>
+        <th>Vote down</th>
+        <th>Title</th>
+    </tr>
+    </thead>
+    <tr th:each="post : ${listOfPosts}" >
+        <td th:text="${post.getVotes}"></td>
+        <td><a th:href="@{'/upVote/' + ${post.getId()}}" th:method="post" >+</a></td>
+        <td><a th:href="@{'/downVote/' + ${post.getId()}}" th:method="post" >-</a></td>
+        <td><a  th:text="*{post.getUrl}"></a></td>
+    </tr>
+</table>
+<div th:if = "${totalPages >1}">
+    <div class = "row col-sm-10">
+        <div class = "col-sm-2">
+            Total Rows:  [[${totalItems}]]
+        </div>
+        <div class = "col-sm-1">
+                <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+                    <a th:if="${currentPage != i}" th:href="@{'/feed/' + ${i}}">[[${i}]]</a>
+                <span th:unless="${currentPage != i}">[[${i}]]</span> &nbsp; &nbsp;
+                </span>
+        </div>
+        <div class = "col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/feed/' + ${currentPage+1}}">Next</a>
+            <span th:unless="${currentPage < totalPages}">Next</span>
+        </div>
+        <div class = "col-sm-1">
+            <a th:if="${currentPage < totalPages}" th:href="@{'/feed/' + ${totalPages}}">Last</a>
+            <span th:unless="${currentPage < totalPages}">Last</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>
