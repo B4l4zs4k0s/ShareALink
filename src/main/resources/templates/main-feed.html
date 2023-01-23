@@ -18,7 +18,7 @@
     </tr>
     </thead>
     <tr th:each="post : ${listOfPosts}" >
-        <td th:text="${post.getVotes}"></td>
+        <td th:text="${post.getScore}"></td>
         <td><a th:href="@{'/upVote/' + ${post.getId()}}" th:method="post" >+</a></td>
         <td><a th:href="@{'/downVote/' + ${post.getId()}}" th:method="post" >-</a></td>
         <td><a th:text="*{post.getTitle()}" th:href="*{post.getUrl}"></a></td>

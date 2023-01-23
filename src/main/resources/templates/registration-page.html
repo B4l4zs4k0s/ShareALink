@@ -9,7 +9,7 @@
 <p>Please provide a username and a password. Do not share your password with anyone!</p>
 <form method="post" th:action="@{/register}" th:object="${register}">
     <input type="text" name="username" placeholder="provide username"><br>
-    <input type="text" name="password" placeholder="provide password"><br>
+    <input type="password" name="password" placeholder="provide password"><br>
     <input type="submit" value="Create account">
 </form>
 </body>

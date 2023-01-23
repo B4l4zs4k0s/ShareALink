@@ -70,14 +70,14 @@ public class PostController {
     }
 
     @GetMapping("/upVote/{id}")
-    public String voteUpPost(@PathVariable(value = "id") Long id) {
-        postService.voteUp(id);
+    public String voteUpPost(@PathVariable(value = "id") Long id, HttpServletRequest httpRequest) {
+        postService.vote(id,cookieService.getNameFromCookie(httpRequest),true );
         return "redirect:/feed/1";
     }
 
     @GetMapping("/downVote/{id}")
-    public String voteDownPost(@PathVariable(value = "id") Long id) {
-        postService.voteDown(id);
+    public String voteDownPost(@PathVariable(value = "id") Long id, HttpServletRequest httpRequest) {
+        postService.vote(id, cookieService.getNameFromCookie(httpRequest),false);
         return "redirect:/feed/1";
     }
 }

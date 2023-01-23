@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "posts")
@@ -16,9 +18,13 @@ public class Post {
     private String title;
     @NotBlank(message = "You must provide a Url!")
     private String url;
-    private int votes;
+    private int score;
 
     @ManyToOne
     //@JoinColumn(name = "id")
     private User user;
+    @OneToMany
+    private List<User> upVoters;
+    @OneToMany
+    private List<User> downVoters;
 }
