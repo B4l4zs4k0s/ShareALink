@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+    <link rel="stylesheet" href="stylesheet.css"/>
     <meta charset="UTF-8">
     <title>Main Feed</title>
 </head>
 <body>
-<p th:text="'Welcome ' + ${username} + ' to the top rated Links page.'"></p>
+<h2 th:text="'Welcome ' + ${username} + ' to the top rated Links page.'"></h2>
 <a href="/newPost" class="btn btn-primary">Submit new post</a><br>
 <table>
     <thead>
