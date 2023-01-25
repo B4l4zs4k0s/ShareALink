@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<link rel="stylesheet" href="stylesheet.css"/>
+<link rel="stylesheet" th:href="@{/stylesheet.css}">
 <head>
     <meta charset="UTF-8">
     <title>Create New Post</title>
@@ -9,7 +9,7 @@
 <h1>Add new post</h1>
 <form th:action="@{/newPost}" th:method="post">
 <input id="title" placeholder="Add title..." type="text" th:name="title" required><br>
-<input id="url" placeholder="Add URL..." type="text" th:name="url" required><br>
+<input id="url" placeholder="Add URL with http:// or https:// format..." type="text" th:name="url" required><br>
 <button type="submit" value="Create new Post">Create new Post</button>
 </form>
 </body>
