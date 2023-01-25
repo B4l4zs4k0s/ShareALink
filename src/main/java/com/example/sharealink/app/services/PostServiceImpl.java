@@ -1,5 +1,6 @@
 package com.example.sharealink.app.services;
 
+import com.example.sharealink.app.exception.InvalidUrlFormatException;
 import com.example.sharealink.app.models.entities.Post;
 import com.example.sharealink.app.models.entities.User;
 import com.example.sharealink.app.repositories.PostRepository;
@@ -25,16 +26,22 @@ public class PostServiceImpl implements PostService {
     public void createPost(String title, String url, String token) {
         Post post = new Post();
         post.setTitle(title);
-        post.setUrl(url);
+        post.setUrl(urlChecker(url));
         post.setScore(0);
         post.setUser(userService.findUserByUsername(tokenService.extractUsernameFromToken(token)));
         postRepository.save(post);
     }
 
-    public List<Post> loadAllPost() {
-        return postRepository.findAll();
+    public boolean urlStartsWith(String url) {
+        return url.startsWith("http://") || (url.startsWith("https://"));
     }
 
+    public String urlChecker(String url) {
+        if (!urlStartsWith(url)) {
+            throw new InvalidUrlFormatException();
+        }
+        return url;
+    }
 
     public void vote(Long id, String username, boolean isUpvote) {
         User user = userService.findUserByUsername(username);
@@ -58,6 +65,10 @@ public class PostServiceImpl implements PostService {
     public void removeOldVote(User user, Post post) {
         post.getUpVoters().remove(user);
         post.getDownVoters().remove(user);
+    }
+
+    public List<Post> loadAllPost() {
+        return postRepository.findAll();
     }
 
     public Page<Post> findPostsPaginatedByDescVotes(int pageNo, int pageSize) {
