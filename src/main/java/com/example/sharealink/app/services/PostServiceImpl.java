@@ -26,21 +26,18 @@ public class PostServiceImpl implements PostService {
     public void createPost(String title, String url, String token) {
         Post post = new Post();
         post.setTitle(title);
-        post.setUrl(urlChecker(url));
+        validateUrl(url);
+        post.setUrl(url);
         post.setScore(0);
         post.setUser(userService.findUserByUsername(tokenService.extractUsernameFromToken(token)));
         postRepository.save(post);
     }
 
-    public boolean urlStartsWith(String url) {
-        return url.startsWith("http://") || (url.startsWith("https://"));
-    }
-
-    public String urlChecker(String url) {
-        if (!urlStartsWith(url)) {
-            throw new InvalidUrlFormatException();
+    private void validateUrl(String url) {
+        if (url.startsWith("http://") || url.startsWith("https://")) {
+            return;
         }
-        return url;
+        throw new InvalidUrlFormatException();
     }
 
     public void vote(Long id, String username, boolean isUpvote) {
@@ -62,7 +59,7 @@ public class PostServiceImpl implements PostService {
         }
     }
 
-    public void removeOldVote(User user, Post post) {
+    private void removeOldVote(User user, Post post) {
         post.getUpVoters().remove(user);
         post.getDownVoters().remove(user);
     }

@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface PostService {
     void createPost(String title, String url, String token);
-    boolean urlStartsWith(String url);
     List<Post> loadAllPost();
     void vote(Long id, String username, boolean isUpvote);
     Page<Post> findPostsPaginatedByDescVotes(int pageNo, int pageSize);
