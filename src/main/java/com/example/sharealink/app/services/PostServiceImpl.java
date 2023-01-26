@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -34,7 +35,7 @@ public class PostServiceImpl implements PostService {
     }
 
     private void validateUrl(String url) {
-        if (url.startsWith("http://") || url.startsWith("https://")) {
+        if (Pattern.matches("http(s?):\\/\\/?([w]{3})?\\.?[a-zA-z]*\\.[a-zA-Z]*\\/?(.*)",url)) {
             return;
         }
         throw new InvalidUrlFormatException();
