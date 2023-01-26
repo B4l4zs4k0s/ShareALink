@@ -35,7 +35,7 @@ public class PostServiceImpl implements PostService {
     }
 
     private void validateUrl(String url) {
-        if (Pattern.matches("http(s?):\\/\\/?([w]{3})?\\.?[a-zA-z]*\\.[a-zA-Z]*\\/?(.*)",url)) {
+        if (Pattern.matches("http(s?):\\/\\/?([w]{3})?\\.?[a-zA-z-]*\\.[a-zA-Z]*\\/?(.*)",url)) {
             return;
         }
         throw new InvalidUrlFormatException();
